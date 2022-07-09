@@ -2,16 +2,21 @@ package ArraysAndStrings;
 
 import CtCILibrary.AssortedMethods;
 
-/** Write a method to replace all spaces in a string with '%20'.
+/**
+ * Write a method to replace all spaces in a string with '%20'.
  * You may assume that the string has sufficient space at the end
  * to hold the additional characters
- * EXAMPLE: input: "Mr John Smith    ", 13 ===> output: "Mr%20John%20Smith"
+ * EXAMPLE: input: "Mr John Smith ", 13 ===> output: "Mr%20John%20Smith"
  */
 public class URLify {
-    /** Solution: two scan approach
-     * Common approach: editing the string from the end, so we don't need to worry about overwriting
-     * first scan: count the number of spaces, compute the extra chars by tripling this number
-     * second scan: In reverse order, replace a space with %20, copy original char otherwise
+    /**
+     * Solution: two scan approach
+     * Common approach: editing the string from the end, so we don't need to worry
+     * about overwriting
+     * first scan: count the number of spaces, compute the extra chars by tripling
+     * this number
+     * second scan: In reverse order, replace a space with %20, copy original char
+     * otherwise
      */
 
     public static void replaceSpaces(char[] str, int trueLength) {
@@ -22,8 +27,10 @@ public class URLify {
             }
         }
         index = trueLength + spaceCount * 2; // the new length after replacing the spaces
-        // End array - trim the length to true length, i.e. get rid of the whitespace at the end
-        if (trueLength < str.length) str[trueLength] = '\0';
+        // End array - trim the length to true length, i.e. get rid of the whitespace at
+        // the end
+        if (trueLength < str.length)
+            str[trueLength] = '\0'; // error handling
         for (i = trueLength - 1; i >= 0; i--) {
             if (str[i] == ' ') {
                 str[index - 1] = '0';
@@ -31,7 +38,7 @@ public class URLify {
                 str[index - 3] = '%';
                 index = index - 3;
             } else {
-                str[index - 1] = str [i];
+                str[index - 1] = str[i];
                 index--;
             }
         }
@@ -40,7 +47,7 @@ public class URLify {
     public static int findLastCharacter(char[] str) {
         for (int i = str.length - 1; i >= 0; i--) {
             if (str[i] != ' ') {
-                return  i;
+                return i;
             }
         }
         return -1;
@@ -53,6 +60,5 @@ public class URLify {
         replaceSpaces(arr, trueLength);
         System.out.println("\"" + AssortedMethods.charArrayToString(arr) + "\"");
     }
-
 
 }
